@@ -3,27 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>QR Dinámico</title>
+  <title>Listado de Registros</title>
   <link rel="stylesheet" href="assets/styles.css" />
-  <link rel="icon" href="data:,"> <!-- Evita error 404 del favicon -->
+  <link rel="icon" href="data:,">
 </head>
 <body>
-  <h1>QR Dinámico</h1>
-  <button id="nuevoRegistro">Nuevo Registro</button>
-  <table id="tablaRegistros">
+  <h1>Listado de Registros</h1>
+  <button onclick="crearNuevoRegistro()">Generar nuevo código QR</button>
+
+  <table>
     <thead>
       <tr>
-        <th>ID</th><th>Proveedor</th><th>Usuario</th><th>Contenido</th><th>Cantidad</th>
-        <th>Edificio</th><th>Localización</th><th>Contrato</th><th>Fecha Entrada</th>
-        <th>Fecha Salida</th><th>Observaciones</th><th>Estatus</th><th>Acciones</th>
+        <th>ID</th>
+        <th>Proveedor</th>
+        <th>Usuario</th>
+        <th>Contenido</th>
+        <th>Cantidad</th>
+        <th>Edificio</th>
+        <th>Localización</th>
+        <th>Contrato</th>
+        <th>Fecha Entrada</th>
+        <th>Fecha Salida</th>
+        <th>Observaciones</th>
+        <th>Estatus</th>
+        <th>Acciones</th>
       </tr>
     </thead>
-    <tbody></tbody>
+    <tbody id="tabla-registros"></tbody>
   </table>
 
   <!-- Librerías necesarias -->
-  https://cdn.jsdelivr.net/npm/qrious/dist/qrious.min.js
-  <script src="https://cdn.jsdelivrabase/supabase-js@2
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/script.js"></script>
 </body>
 </html>
