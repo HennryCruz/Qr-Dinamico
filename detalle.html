@@ -3,13 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Detalle QR</title>
+  <title>Detalle del Registro</title>
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
   <div class="container">
     <h1>Detalle del Registro</h1>
-    <div id="formulario-container"></div>
+    <form id="formulario">
+      <div class="form-group"><label>Proveedor:</label><input type="text" name="proveedor" /></div>
+      <div class="form-group"><label>Usuario:</label><input type="text" name="usuario" /></div>
+      <div class="form-group"><label>Contenido:</label><input type="text" name="contenido" /></div>
+      <div class="form-group"><label>Cantidad:</label><input type="number" name="cantidad" /></div>
+      <div class="form-group"><label>Edificio:</label><input type="text" name="edificio" /></div>
+      <div class="form-group"><label>Localización:</label><input type="text" name="localizacion" /></div>
+      <div class="form-group"><label>Contrato:</label><input type="text" name="contrato" /></div>
+      <div class="form-group"><label>Fecha de Entrada:</label><input type="date" name="fecha_entrada" /></div>
+      <div class="form-group"><label>Fecha de Salida:</label><input type="date" name="fecha_salida" /></div>
+      <div class="form-group"><label>Observaciones:</label><textarea name="observaciones"></textarea></div>
+      <div class="form-group">
+        <label>Estatus:</label>
+        <select name="estatus">
+          <option value="entregado">Entregado</option>
+          <option value="devolucion">Devuelto</option>
+        </select>
+      </div>
+      <button type="submit">Guardar</button>
+    </form>
+    <div id="vista-datos" style="display:none;"></div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/detalle.js"></script>
