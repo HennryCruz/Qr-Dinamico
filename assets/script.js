@@ -26,7 +26,7 @@ async function cargarRegistros() {
       <td>${registro.observaciones || ''}</td>
       <td>${registro.estatus || ''}</td>
       <td>
-        <a href="detalle.html?id=${registro.id}">Modificar</a> |
+        <a href="detalle.html?id=${registro.id}" class="button">Modificar</a>
         <button onclick="descargarQR(${registro.id})">Descargar QR</button>
       </td>
     `;
@@ -43,18 +43,8 @@ async function crearNuevoRegistro() {
     alert('No se pudo crear el nuevo registro.');
     return;
   }
-  mostrarQR(nuevoId);
+  alert(`Registro creado con ID ${nuevoId}. Puedes escanear el QR para llenarlo.`);
   cargarRegistros();
-}
-
-function mostrarQR(id) {
-  const contenedor = document.getElementById('qr-preview');
-  contenedor.innerHTML = '';
-  new QRCode(contenedor, {
-    text: `${window.location.origin}/detalle.html?id=${id}`,
-    width: 200,
-    height: 200
-  });
 }
 
 function descargarQR(id) {
