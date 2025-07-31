@@ -1,7 +1,7 @@
 // Reemplaza con tu propia URL y clave secreta de Supabase
-const supabaseUrl = 'https://xxxxxxxx.supabase.co';
-const supabaseKey = 'eyxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+const supabaseUrl = 'https://fbmdevivfhesggervjjy.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZibWRldml2Zmhlc2dnZXJ2amp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM4NDM0OTUsImV4cCI6MjA2OTQxOTQ5NX0.Mq_xKZQgachZLHeKLyIc76b7Xef55R7-eMnzfSTwQbQ';
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 async function cargarRegistros() {
   const { data, error } = await supabase.from('registro').select('*').order('id', { ascending: true });
