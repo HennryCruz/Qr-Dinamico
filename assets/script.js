@@ -4,7 +4,7 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 async function cargarRegistros() {
-  const { data, error } = await supabase.from('registro').select('*').order('id', { ascending: true });
+  const { data, error } = await supabase.from('registros_qr').select('*').order('id', { ascending: true });
   if (error) {
     console.error('Error al cargar datos:', error);
     return;
@@ -37,7 +37,7 @@ async function cargarRegistros() {
 
 async function crearNuevoRegistro() {
   const { data: ultimo, error: errorUltimo } = await supabase
-    .from('registro')
+    .from('registros_qr')
     .select('id')
     .order('id', { ascending: false })
     .limit(1);
@@ -45,7 +45,7 @@ async function crearNuevoRegistro() {
   const nuevoId = ultimo && ultimo.length ? ultimo[0].id + 1 : 1;
 
   const { data, error } = await supabase
-    .from('registro')
+    .from('registros_qr')
     .insert([{ id: nuevoId }]);
 
   if (error) {
