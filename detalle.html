@@ -1,11 +1,80 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Detalle del Registro</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <h1>Detalle del Registro</h1>
-  <p>Aquí se mostrará el formulario o los datos del QR escaneado.</p>
+  <div id="contenido"></div>
+
+  <script>
+    const supabase = window.supabase.createClient(
+      'https://fbmdevivfhesggervjjy.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZibWRldml2Zmhlc2dnZXJ2amp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM4NDM0OTUsImV4cCI6MjA2OTQxOTQ5NX0.Mq_xKZQgachZLHeKLyIc76b7Xef55R7-eMnzfSTwQbQ'
+    );
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    async function cargarDetalle() {
+      const { data, error } = await supabase.from("registros_qr").select("*").eq("id", id).single();
+      const contenedor = document.getElementById("contenido");
+
+      if (error || !data) {
+        contenedor.innerHTML = "<p>Error al cargar el registro.</p>";
+        return;
+      }
+
+      const vacio = !data.proveedor && !data.usuario && !data.contenido;
+
+      if (vacio) {
+        contenedor.innerHTML = `
+          <form id="formulario">
+            <label>Proveedor: <input name="proveedor" required></label><br>
+            <label>Usuario: <input name="usuario" required></label><br>
+            <label>Contenido: <input name="contenido" required></label><br>
+            <label>Cantidad: <input name="cantidad" type="number"></label><br>
+            <label>Edificio: <input name="edificio"></label><br>
+            <label>Localización: <input name="localizacion"></label><br>
+            <label>Contrato: <input name="contrato"></label><br>
+            <label>Fecha Entrada: <input name="fecha_entrada" type="date"></label><br>
+            <label>Observaciones: <textarea name="observaciones"></textarea></label><br>
+            <label>Estatus:
+              <select name="estatus">
+                <option value="entregado">Entregado</option>
+                <option value="devolucion">Devuelto</option>
+              </select>
+            </label><br>
+            <button type="submit">Guardar</button>
+          </form>
+        `;
+
+        document.getElementById("formulario").addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          const valores = Object.fromEntries(formData.entries());
+          const { error } = await supabase.from("registros_qr").update(valores).eq("id", id);
+          if (error) {
+            alert("Error al guardar");
+          } else {
+            alert("Datos guardados");
+            location.reload();
+          }
+        });
+      } else {
+        contenedor.innerHTML = `
+          <p><strong>Proveedor:</strong> ${data.proveedor}</p>
+          <p><strong>Contenido:</strong> ${data.contenido}</p>
+          <p><strong>Edificio:</strong> ${data.edificio}</p>
+          <p><strong>Contrato:</strong> ${data.contrato}</p>
+          <p><strong>Observaciones:</strong> ${data.observaciones}</p>
+        `;
+      }
+    }
+
+    cargarDetalle();
+  </script>
 </body>
 </html>

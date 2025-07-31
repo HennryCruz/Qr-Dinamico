@@ -1,4 +1,3 @@
-// Reemplaza con tu propia URL y clave secreta de Supabase
 const supabaseUrl = 'https://fbmdevivfhesggervjjy.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZibWRldml2Zmhlc2dnZXJ2amp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM4NDM0OTUsImV4cCI6MjA2OTQxOTQ5NX0.Mq_xKZQgachZLHeKLyIc76b7Xef55R7-eMnzfSTwQbQ';
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
@@ -27,8 +26,8 @@ async function cargarRegistros() {
       <td>${registro.observaciones || ''}</td>
       <td>${registro.estatus || ''}</td>
       <td>
-        <a href="detalle.html?id=${registro.id}" class="text-blue-500 underline">Modificar</a> |
-        <button onclick="descargarQR(${registro.id})" class="text-green-500 underline">Descargar QR</button>
+        <a href="detalle.html?id=${registro.id}">Modificar</a> |
+        <button onclick="descargarQR(${registro.id})">Descargar QR</button>
       </td>
     `;
     tabla.appendChild(fila);
@@ -36,53 +35,35 @@ async function cargarRegistros() {
 }
 
 async function crearNuevoRegistro() {
-  const { data: ultimo, error: errorUltimo } = await supabase
-    .from('registros_qr')
-    .select('id')
-    .order('id', { ascending: false })
-    .limit(1);
-
+  const { data: ultimo } = await supabase.from('registros_qr').select('id').order('id', { ascending: false }).limit(1);
   const nuevoId = ultimo && ultimo.length ? ultimo[0].id + 1 : 1;
-
-  const { data, error } = await supabase
-    .from('registros_qr')
-    .insert([{ id: nuevoId }]);
-
+  const { error } = await supabase.from('registros_qr').insert([{ id: nuevoId }]);
   if (error) {
     console.error('Error al crear nuevo registro:', error);
     alert('No se pudo crear el nuevo registro.');
     return;
   }
-
-  generarQR(nuevoId);
+  mostrarQR(nuevoId);
   cargarRegistros();
 }
 
-function generarQR(id) {
-  const qrContainer = document.createElement('div');
-  const qr = new QRCode(qrContainer, {
+function mostrarQR(id) {
+  const contenedor = document.getElementById('qr-preview');
+  contenedor.innerHTML = '';
+  new QRCode(contenedor, {
     text: `${window.location.origin}/detalle.html?id=${id}`,
     width: 200,
     height: 200
   });
-
-  setTimeout(() => {
-    const img = qrContainer.querySelector('img');
-    const enlace = document.createElement('a');
-    enlace.href = img.src;
-    enlace.download = `QR_${id}.png`;
-    enlace.click();
-  }, 1000);
 }
 
 function descargarQR(id) {
   const qrTemp = document.createElement('div');
-  const qr = new QRCode(qrTemp, {
+  new QRCode(qrTemp, {
     text: `${window.location.origin}/detalle.html?id=${id}`,
     width: 200,
     height: 200
   });
-
   setTimeout(() => {
     const img = qrTemp.querySelector('img');
     const link = document.createElement('a');
