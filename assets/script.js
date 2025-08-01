@@ -23,6 +23,7 @@ async function cargarRegistros() {
       <td>${registro.contrato || ''}</td>
       <td>${registro.fecha_entrada || ''}</td>
       <td>${registro.fecha_salida || ''}</td>
+      <td>${registro.no_serie || ''}</td>
       <td>${registro.observaciones || ''}</td>
       <td>${registro.estatus || ''}</td>
       <td>
