@@ -57,10 +57,34 @@ function descargarQR(id) {
   });
   setTimeout(() => {
     const img = qrTemp.querySelector('img');
-    const link = document.createElement('a');
-    link.href = img.src;
-    link.download = `QR_${id}.png`;
-    link.click();
+    const canvas = document.createElement('canvas');
+    const tituloImg = new Image();
+    tituloImg.src = 'assets/titulo.png'; // Cambia la ruta si tu imagen está en otro lugar
+
+    tituloImg.onload = function() {
+      // Ajusta el tamaño del canvas según la imagen y el QR
+      canvas.width = Math.max(tituloImg.width, 200);
+      canvas.height = tituloImg.height + 200 + 40; // 40px para el texto
+
+      const ctx = canvas.getContext('2d');
+      // Dibuja la imagen arriba
+      ctx.drawImage(tituloImg, (canvas.width - tituloImg.width) / 2, 0);
+
+      // Dibuja el QR debajo de la imagen
+      ctx.drawImage(img, (canvas.width - 200) / 2, tituloImg.height);
+
+      // Dibuja el texto ID abajo del QR
+      ctx.font = 'bold 20px Segoe UI, Arial';
+      ctx.fillStyle = '#222';
+      ctx.textAlign = 'center';
+      ctx.fillText(`ID: ${id}`, canvas.width / 2, tituloImg.height + 200 + 30);
+
+      // Descarga el canvas como imagen
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = `QR_${id}.png`;
+      link.click();
+    };
   }, 1000);
 }
 
