@@ -26,7 +26,7 @@ async function cargarRegistros() {
       <td>${registro.observaciones || ''}</td>
       <td>${registro.estatus || ''}</td>
       <td>
-        <a href="detalle.html?id=${registro.id}" class="button">Modificar</a>
+        <a href="detalle.html?id=${registro.id}&edit=1" class="button">Modificar</a>
         <button onclick="descargarQR(${registro.id})">Descargar QR</button>
       </td>
     `;
