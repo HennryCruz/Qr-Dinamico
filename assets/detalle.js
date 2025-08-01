@@ -4,6 +4,7 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 const params = new URLSearchParams(window.location.search);
 const id = params.get('id');
+const editMode = params.get('edit') === '1';
 
 async function cargarDetalle() {
   const { data, error } = await supabase.from('registros_qr').select('*').eq('id', id).single();
@@ -16,8 +17,8 @@ async function cargarDetalle() {
   const vistaDatos = document.getElementById('vista-datos');
   const campoFechaSalida = document.querySelector('[name="fecha_salida"]').parentElement;
 
-  // Mostrar formulario si faltan datos obligatorios
-  if (!data.proveedor && !data.contenido && !data.edificio && !data.contrato && !data.observaciones) {
+  // Mostrar formulario si faltan datos obligatorios o si viene de "Modificar"
+  if (editMode || (!data.proveedor && !data.contenido && !data.edificio && !data.contrato && !data.observaciones)) {
     formulario.style.display = 'block';
     vistaDatos.style.display = 'none';
   } else {
@@ -48,7 +49,12 @@ async function cargarDetalle() {
       campoFechaSalida.style.display = '';
     } else {
       campoFechaSalida.style.display = 'none';
-      document.querySelector('[name="fecha_salida"]').value = '';
+      document.querySelector('[name="fecha_salida"]').value = '';      // ...existing code...
+      <td>
+        <a href="detalle.html?id=${registro.id}&edit=1" class="button">Modificar</a>
+        <button onclick="descargarQR(${registro.id})">Descargar QR</button>
+      </td>
+      // ...existing code...
     }
   }
   estatusSelect.addEventListener('change', toggleFechaSalida);
