@@ -77,32 +77,65 @@ button:hover, .button:hover {
   background: #0056b3;
 }
 
-.table-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
+/* Ajuste de columnas de la tabla */
+th, td {
+  padding: 0.7rem 1rem;
+  text-align: center;
+  white-space: nowrap; /* Evita saltos de línea */
+  border-bottom: 1px solid #e3e6ee;
+  font-size: 0.98rem;
 }
 
+td.observaciones, th.observaciones {
+  white-space: normal !important; /* Permite saltos de línea solo en Observaciones */
+  max-width: 320px;
+  min-width: 180px;
+  word-break: break-word;
+}
+
+/* Botones de acción uniformes */
+.accion-btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.97rem;
+  margin-right: 0.5rem;
+  min-width: 120px;
+  text-align: center;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.accion-btn:last-child {
+  margin-right: 0;
+}
+
+.accion-btn:hover {
+  background: #0056b3;
+  box-shadow: 0 2px 8px rgba(0,123,255,0.08);
+}
+
+/* Mejoras visuales minimalistas */
 table {
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   background: #fff;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.04);
-}
-
-th, td {
-  padding: 0.7rem 1rem;
-  text-align: center;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
 }
 
 th {
   background: #f4f6fb;
   font-weight: 600;
   color: #222;
+  border-bottom: 2px solid #e3e6ee;
 }
 
 tr:nth-child(even) {
@@ -111,35 +144,20 @@ tr:nth-child(even) {
 
 tr:hover {
   background: #e9f1ff;
+  transition: background 0.2s;
 }
 
-#qr-contenedor {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2rem 0 1rem 0;
-}
-
-#qr-contenedor img {
-  margin-bottom: 0.5rem;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
-  padding: 8px;
-  max-width: 220px;
-}
-
-#qr-contenedor .qr-titulo {
-  margin-bottom: 1rem;
-  max-width: 180px;
-}
-
+/* Responsive para tabla */
 @media (max-width: 900px) {
   .container {
     max-width: 98vw;
     padding: 1rem;
   }
   table {
-    font-size: 0.95rem;
+    font-size: 0.93rem;
+  }
+  td.observaciones, th.observaciones {
+    max-width: 160px;
+    min-width: 80px;
   }
 }
