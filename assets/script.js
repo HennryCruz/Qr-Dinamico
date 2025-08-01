@@ -44,7 +44,7 @@ async function crearNuevoRegistro() {
     alert('No se pudo crear el nuevo registro.');
     return;
   }
-  alert(`Registro creado con ID ${nuevoId}. Puedes escanear el QR para llenarlo.`);
+  alert(`Registro creado con No° ID ${nuevoId}.`);
   cargarRegistros();
 }
 
