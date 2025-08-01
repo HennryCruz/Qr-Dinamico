@@ -74,13 +74,31 @@ async function guardarCambios(e) {
     datos.fecha_salida = null;
   }
 
+  const formulario = document.getElementById('formulario');
+  const vistaDatos = document.getElementById('vista-datos');
   const { error } = await supabase.from('registros_qr').update(datos).eq('id', id);
   if (error) {
     console.error('Error al guardar cambios:', error);
     alert('No se pudieron guardar los cambios.');
   } else {
     alert('Cambios guardados correctamente.');
-    window.location.href = 'index.html';
+    // Si el formulario estaba visible (llenado por QR), mostrar vista-datos en vez de ir al index
+    if (formulario.style.display === 'block') {
+      // Recargar los datos y mostrar la vista
+      const { data } = await supabase.from('registros_qr').select('*').eq('id', id).single();
+      formulario.style.display = 'none';
+      vistaDatos.style.display = 'block';
+      vistaDatos.innerHTML = `
+        <div><strong>Proveedor:</strong> ${data.proveedor || ''}</div>
+        <div><strong>Usuario:</strong> ${data.usuario || ''}</div>
+        <div><strong>Contenido:</strong> ${data.contenido || ''}</div>
+        <div><strong>Contrato:</strong> ${data.contrato || ''}</div>
+        <div><strong>Fecha de Entrada:</strong> ${data.fecha_entrada || ''}</div>
+        <div><strong>Observaciones:</strong> ${data.observaciones || ''}</div>
+      `;
+    } else {
+      window.location.href = 'index.html';
+    }
   }
 }
 
