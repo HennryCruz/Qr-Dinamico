@@ -17,20 +17,25 @@ async function cargarDetalle() {
   const vistaDatos = document.getElementById('vista-datos');
   const campoFechaSalida = document.querySelector('[name="fecha_salida"]').parentElement;
 
-  // Mostrar formulario si faltan datos obligatorios o si viene de "Modificar"
-  if (editMode || (!data.proveedor && !data.contenido && !data.edificio && !data.contrato && !data.observaciones)) {
+  // Si viene de "Modificar" (edit=1), siempre mostrar formulario
+  if (editMode) {
+    formulario.style.display = 'block';
+    vistaDatos.style.display = 'none';
+  } else if (!data.proveedor && !data.contenido && !data.edificio && !data.contrato && !data.observaciones) {
+    // Si no hay datos obligatorios, mostrar formulario
     formulario.style.display = 'block';
     vistaDatos.style.display = 'none';
   } else {
-    // Mostrar solo vista con campos seleccionados
+    // Si ya hay datos, mostrar solo los campos seleccionados
     formulario.style.display = 'none';
     vistaDatos.style.display = 'block';
     vistaDatos.innerHTML = `
       <div><strong>Proveedor:</strong> ${data.proveedor || ''}</div>
       <div><strong>Usuario:</strong> ${data.usuario || ''}</div>
       <div><strong>Contenido:</strong> ${data.contenido || ''}</div>
-      <div><strong>Contrato:</strong> ${data.contrato || ''}</div>
+      <div><strong>Localización:</strong> ${data.localizacion || ''}</div>
       <div><strong>Fecha de Entrada:</strong> ${data.fecha_entrada || ''}</div>
+      <div><strong>Contrato:</strong> ${data.contrato || ''}</div>
       <div><strong>Observaciones:</strong> ${data.observaciones || ''}</div>
     `;
     return;
@@ -49,12 +54,7 @@ async function cargarDetalle() {
       campoFechaSalida.style.display = '';
     } else {
       campoFechaSalida.style.display = 'none';
-      document.querySelector('[name="fecha_salida"]').value = '';      // ...existing code...
-      <td>
-        <a href="detalle.html?id=${registro.id}&edit=1" class="button">Modificar</a>
-        <button onclick="descargarQR(${registro.id})">Descargar QR</button>
-      </td>
-      // ...existing code...
+      document.querySelector('[name="fecha_salida"]').value = '';
     }
   }
   estatusSelect.addEventListener('change', toggleFechaSalida);
@@ -88,9 +88,11 @@ async function guardarCambios(e) {
     alert('No se pudieron guardar los cambios.');
   } else {
     alert('Cambios guardados correctamente.');
-    // Si el formulario estaba visible (llenado por QR), mostrar vista-datos en vez de ir al index
-    if (formulario.style.display === 'block') {
-      // Recargar los datos y mostrar la vista
+    // Si viene de "Modificar", regresar al index
+    if (editMode) {
+      window.location.href = 'index.html';
+    } else {
+      // Si fue llenado por QR, mostrar solo los datos seleccionados
       const { data } = await supabase.from('registros_qr').select('*').eq('id', id).single();
       formulario.style.display = 'none';
       vistaDatos.style.display = 'block';
@@ -98,12 +100,11 @@ async function guardarCambios(e) {
         <div><strong>Proveedor:</strong> ${data.proveedor || ''}</div>
         <div><strong>Usuario:</strong> ${data.usuario || ''}</div>
         <div><strong>Contenido:</strong> ${data.contenido || ''}</div>
-        <div><strong>Contrato:</strong> ${data.contrato || ''}</div>
+        <div><strong>Localización:</strong> ${data.localizacion || ''}</div>
         <div><strong>Fecha de Entrada:</strong> ${data.fecha_entrada || ''}</div>
+        <div><strong>Contrato:</strong> ${data.contrato || ''}</div>
         <div><strong>Observaciones:</strong> ${data.observaciones || ''}</div>
       `;
-    } else {
-      window.location.href = 'index.html';
     }
   }
 }
