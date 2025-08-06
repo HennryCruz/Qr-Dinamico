@@ -161,3 +161,10 @@ tr:hover {
     min-width: 80px;
   }
 }
+
+.acciones-columna {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
