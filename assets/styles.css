@@ -173,3 +173,29 @@ tr:hover {
   align-items: center;
   min-width: 120px;
 }
+
+.acciones-fila {
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+  justify-content: center;
+  align-items: center;
+  min-width: 90px;
+  max-width: 90px;
+  padding: 0;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 1.15rem;
+  cursor: pointer;
+  padding: 0.12rem 0.12rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.icon-btn:hover {
+  background: #e9f1ff;
+}
