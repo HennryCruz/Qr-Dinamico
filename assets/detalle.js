@@ -64,7 +64,7 @@ async function cargarDetalle() {
 async function guardarCambios(e) {
   e.preventDefault();
   const campos = [
-    'proveedor', 'usuario', 'contenido', 'cantidad', 'edificio',
+    'proveedor', 'usuario', 'contenido', 'edificio',
     'localizacion', 'contrato', 'fecha_entrada', 'fecha_salida',
     'no_serie', 'observaciones', 'estatus'
   ];
@@ -74,6 +74,8 @@ async function guardarCambios(e) {
     const input = document.querySelector(`[name="${campo}"]`);
     datos[campo] = input ? input.value : null;
   });
+
+  datos.cantidad = 1; // Siempre 1
 
   // Si estatus es distinto de "devolucion", limpiar fecha_salida
   if (datos.estatus !== 'devolucion') {
