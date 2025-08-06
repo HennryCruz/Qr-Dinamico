@@ -96,7 +96,7 @@ function descargarQR(id) {
       ctx.fillStyle = "#222";
       ctx.textAlign = "center";
       // Dibuja el texto bien centrado y separado del QR
-      ctx.fillText(`No° ID: ${id}`, canvas.width / 2, 250); // Y=250 es debajo del QR
+      ctx.fillText(`ID: ${id}`, canvas.width / 2, 250); // Y=250 es debajo del QR
       // Descargar el canvas como imagen
       const link = document.createElement('a');
       link.href = canvas.toDataURL("image/png");
