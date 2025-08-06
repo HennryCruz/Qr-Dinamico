@@ -24,9 +24,9 @@ async function cargarRegistros() {
       <td>${registro.fecha_entrada || ''}</td>
       <td>${registro.fecha_salida || ''}</td>
       <td>${registro.no_serie || ''}</td>
-      <td>${registro.observaciones || ''}</td>
+      <td class="observaciones">${registro.observaciones || ''}</td>
       <td>${registro.estatus || ''}</td>
-      <td>
+      <td class="acciones">
         <div class="acciones-fila">
           <button class="icon-btn" title="Modificar" onclick="location.href='detalle.html?id=${registro.id}&edit=1'">✏️</button>
           <button class="icon-btn" title="Descargar QR" onclick="descargarQR(${registro.id})">📥</button>
@@ -83,42 +83,35 @@ function descargarQR(id) {
     }
   });
 
-  // Crear un contenedor temporal
   const tempDiv = document.createElement('div');
   document.body.appendChild(tempDiv);
-
   qrCode.append(tempDiv);
 
   setTimeout(async () => {
     const qrBlob = await qrCode.getRawData("png");
     const qrUrl = URL.createObjectURL(qrBlob);
 
-    // Crear canvas para agregar texto debajo
     const canvas = document.createElement('canvas');
     canvas.width = 220;
-    canvas.height = 270; // Más alto para el texto
+    canvas.height = 270;
     const ctx = canvas.getContext('2d');
 
-    // Limpiar el canvas antes de dibujar
     ctx.fillStyle = "#fff";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Cargar la imagen QR
     const img = new window.Image();
     img.onload = function() {
       ctx.drawImage(img, 0, 0, 220, 220);
       ctx.font = "bold 18px Segoe UI, Arial";
       ctx.fillStyle = "#222";
       ctx.textAlign = "center";
-      // Dibuja el texto bien centrado y separado del QR
-      ctx.fillText(`ID: ${id}`, canvas.width / 2, 250); // Y=250 es debajo del QR
-      // Descargar el canvas como imagen
+      ctx.fillText(`ID: ${id}`, canvas.width / 2, 250);
+
       const link = document.createElement('a');
       link.href = canvas.toDataURL("image/png");
       link.download = `QR_${id}.png`;
       link.click();
 
-      // Limpieza
       tempDiv.remove();
       URL.revokeObjectURL(qrUrl);
     };
