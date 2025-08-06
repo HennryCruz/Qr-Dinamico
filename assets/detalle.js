@@ -33,10 +33,10 @@ async function cargarDetalle() {
       <div><strong>Proveedor:</strong> ${data.proveedor || ''}</div>
       <div><strong>Usuario:</strong> ${data.usuario || ''}</div>
       <div><strong>Contenido:</strong> ${data.contenido || ''}</div>
+      <div><strong>Edificio:</strong> ${data.edificio || ''}</div>
       <div><strong>Localización:</strong> ${data.localizacion || ''}</div>
       <div><strong>Fecha de Entrada:</strong> ${data.fecha_entrada || ''}</div>
       <div><strong>No. Serie:</strong> ${data.no_serie || ''}</div>
-      <div><strong>Contrato:</strong> ${data.contrato || ''}</div>
     `;
     return;
   }
@@ -112,9 +112,9 @@ async function guardarCambios(e) {
         <div><strong>Proveedor:</strong> ${data.proveedor || ''}</div>
         <div><strong>Usuario:</strong> ${data.usuario || ''}</div>
         <div><strong>Contenido:</strong> ${data.contenido || ''}</div>
+        <div><strong>Edificio:</strong> ${data.edificio || ''}</div>
         <div><strong>Localización:</strong> ${data.localizacion || ''}</div>
         <div><strong>Fecha de Entrada:</strong> ${data.fecha_entrada || ''}</div>
-        <div><strong>Fecha de Salida:</strong> ${data.fecha_salida || ''}</div>
         <div><strong>No. Serie:</strong> ${data.no_serie || ''}</div>
         <div><strong>Contrato:</strong> ${data.contrato || ''}</div>
         <div><strong>Observaciones:</strong> ${data.observaciones || ''}</div>
