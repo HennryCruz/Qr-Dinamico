@@ -49,19 +49,62 @@ async function crearNuevoRegistro() {
 }
 
 function descargarQR(id) {
-  const qrTemp = document.createElement('div');
-  new QRCode(qrTemp, {
-    text: `${window.location.origin}/detalle.html?id=${id}`,
-    width: 200,
-    height: 200
+  const qrCode = new QRCodeStyling({
+    width: 220,
+    height: 220,
+    data: `${window.location.origin}/detalle.html?id=${id}`,
+    image: "assets/titulo.png",
+    imageOptions: {
+      crossOrigin: "anonymous",
+      margin: 4,
+      imageSize: 0.25, // 25% del QR
+    },
+    dotsOptions: {
+      color: "#222",
+      type: "rounded"
+    },
+    backgroundOptions: {
+      color: "#fff",
+    }
   });
-  setTimeout(() => {
-    const img = qrTemp.querySelector('img');
-    const link = document.createElement('a');
-    link.href = img.src;
-    link.download = `QR_${id}.png`;
-    link.click();
-  }, 1000);
+
+  // Crear un contenedor temporal
+  const tempDiv = document.createElement('div');
+  document.body.appendChild(tempDiv);
+
+  qrCode.append(tempDiv);
+
+  setTimeout(async () => {
+    const qrBlob = await qrCode.getRawData("png");
+    const qrUrl = URL.createObjectURL(qrBlob);
+
+    // Crear canvas para agregar texto debajo
+    const canvas = document.createElement('canvas');
+    canvas.width = 220;
+    canvas.height = 260; // Espacio extra para el texto
+    const ctx = canvas.getContext('2d');
+
+    // Cargar la imagen QR
+    const img = new window.Image();
+    img.onload = function() {
+      ctx.drawImage(img, 0, 0, 220, 220);
+      ctx.font = "bold 18px Segoe UI, Arial";
+      ctx.fillStyle = "#222";
+      ctx.textAlign = "center";
+      ctx.fillText(`ID: ${id}`, 110, 245); // Centrado debajo del QR
+
+      // Descargar el canvas como imagen
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL("image/png");
+      link.download = `QR_${id}.png`;
+      link.click();
+
+      // Limpieza
+      tempDiv.remove();
+      URL.revokeObjectURL(qrUrl);
+    };
+    img.src = qrUrl;
+  }, 800);
 }
 
 if (document.getElementById('tabla-registros')) {
