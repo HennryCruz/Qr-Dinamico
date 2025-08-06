@@ -1,3 +1,4 @@
+/* ----------- Estilo general ----------- */
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
   background: #f4f6fb;
@@ -22,7 +23,8 @@ h1 {
   letter-spacing: 1px;
 }
 
-button {
+/* ----------- Botones generales ----------- */
+button, .button {
   background: #007bff;
   color: #fff;
   border: none;
@@ -30,17 +32,19 @@ button {
   border-radius: 5px;
   cursor: pointer;
   font-size: 0.93rem;
-  margin-bottom: 1rem;
-  display: inline-block;
+  text-align: center;
   transition: background 0.2s, box-shadow 0.2s;
   box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  display: inline-block;
+  margin-bottom: 1rem;
 }
 
-button:hover {
+button:hover, .button:hover {
   background: #0056b3;
   box-shadow: 0 2px 8px rgba(0,123,255,0.08);
 }
 
+/* ----------- Tabla de registros ----------- */
 table {
   border-collapse: separate;
   border-spacing: 0;
@@ -65,6 +69,16 @@ th {
   color: #222;
 }
 
+tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+tr:hover {
+  background: #e9f1ff;
+  transition: background 0.2s;
+}
+
+/* ----------- Columnas especiales ----------- */
 td.observaciones, th.observaciones {
   white-space: normal !important;
   max-width: 300px;
@@ -76,15 +90,7 @@ th.acciones, td.acciones {
   min-width: 130px;
 }
 
-tr:nth-child(even) {
-  background: #f8fafc;
-}
-
-tr:hover {
-  background: #e9f1ff;
-  transition: background 0.2s;
-}
-
+/* ----------- Botones de acciones (✏️ 📥 🗑️) ----------- */
 .acciones-fila {
   display: flex;
   justify-content: center;
@@ -107,17 +113,79 @@ tr:hover {
   background: #e9f1ff;
 }
 
-/* Responsive */
+/* ----------- Estilos del formulario ----------- */
+form {
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  background: #f8fafc;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* ----------- Visualización de datos (detalle) ----------- */
+.visualizacion-datos {
+  max-width: 650px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+  font-size: 1rem;
+}
+
+.visualizacion-datos h2 {
+  margin-top: 0;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.visualizacion-datos p {
+  margin-bottom: 0.75rem;
+}
+
+.visualizacion-datos strong {
+  color: #333;
+}
+
+/* ----------- Responsive ----------- */
 @media (max-width: 900px) {
   .container {
     max-width: 98vw;
     padding: 1rem;
   }
+
   table {
     font-size: 0.93rem;
   }
+
   td.observaciones, th.observaciones {
     max-width: 160px;
     min-width: 80px;
+  }
+
+  .visualizacion-datos {
+    padding: 1.2rem;
   }
 }
