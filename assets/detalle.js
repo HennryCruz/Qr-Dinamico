@@ -59,6 +59,16 @@ async function cargarDetalle() {
   }
   estatusSelect.addEventListener('change', toggleFechaSalida);
   toggleFechaSalida();
+
+  const estatusGroup = document.getElementById('estatus-group');
+  if (!editMode && estatusGroup) {
+    estatusGroup.style.display = 'none';
+    // Forzar estatus a "entregado" al llenar por QR
+    const estatusSelect = document.querySelector('[name="estatus"]');
+    if (estatusSelect) estatusSelect.value = "entregado";
+  } else if (editMode && estatusGroup) {
+    estatusGroup.style.display = '';
+  }
 }
 
 async function guardarCambios(e) {
