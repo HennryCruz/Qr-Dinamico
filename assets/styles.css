@@ -7,7 +7,7 @@ body {
 }
 
 .container {
-  max-width: 750px;
+  max-width: 1200px;
   margin: 40px auto;
   background: #fff;
   padding: 2.5rem 2rem;
@@ -22,37 +22,7 @@ h1 {
   letter-spacing: 1px;
 }
 
-form {
-  margin: 0 auto;
-  max-width: 500px;
-}
-
-.form-group {
-  margin-bottom: 1.2rem;
-}
-
-label {
-  display: block;
-  margin-bottom: 0.3rem;
-  font-weight: 500;
-}
-
-input, textarea, select {
-  width: 100%;
-  padding: 0.55rem 0.7rem;
-  border: 1px solid #d1d5db;
-  border-radius: 5px;
-  background: #f8fafc;
-  font-size: 1rem;
-  transition: border 0.2s;
-}
-
-input:focus, textarea:focus, select:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-button, .button {
+button {
   background: #007bff;
   color: #fff;
   border: none;
@@ -60,86 +30,50 @@ button, .button {
   border-radius: 5px;
   cursor: pointer;
   font-size: 0.93rem;
-  margin: 0;
-  min-width: 110px;
-  max-width: 110px;
-  text-align: center;
-  text-decoration: none;
-  display: block;
+  margin-bottom: 1rem;
+  display: inline-block;
   transition: background 0.2s, box-shadow 0.2s;
   box-shadow: 0 1px 4px rgba(0,0,0,0.04);
 }
 
-button:last-child, .button:last-child {
-  margin-right: 0;
-}
-
-button:hover, .button:hover {
+button:hover {
   background: #0056b3;
   box-shadow: 0 2px 8px rgba(0,123,255,0.08);
 }
 
-/* Ajuste de columnas de la tabla */
-th, td {
-  padding: 0.7rem 1rem;
-  text-align: center;
-  white-space: nowrap; /* Evita saltos de línea */
-  border-bottom: 1px solid #e3e6ee;
-  font-size: 0.98rem;
-}
-
-td.observaciones, th.observaciones {
-  white-space: normal !important; /* Permite saltos de línea solo en Observaciones */
-  max-width: 320px;
-  min-width: 180px;
-  word-break: break-word;
-}
-
-/* Botones de acción uniformes y compactos */
-.accion-btn {
-  background: #007bff;
-  color: #fff;
-  border: none;
-  padding: 0.45rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.93rem;
-  margin: 0;
-  min-width: 110px;
-  max-width: 110px;
-  text-align: center;
-  transition: background 0.2s, box-shadow 0.2s;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-  display: block;
-}
-
-.accion-btn:last-child {
-  margin-right: 0;
-}
-
-.accion-btn:hover {
-  background: #0056b3;
-  box-shadow: 0 2px 8px rgba(0,123,255,0.08);
-}
-
-/* Mejoras visuales minimalistas */
 table {
   border-collapse: separate;
   border-spacing: 0;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 16px rgba(0,0,0,0.06);
 }
 
+th, td {
+  padding: 0.6rem 0.6rem;
+  text-align: center;
+  border-bottom: 1px solid #e3e6ee;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
 th {
   background: #f4f6fb;
   font-weight: 600;
   color: #222;
-  border-bottom: 2px solid #e3e6ee;
+}
+
+td.observaciones, th.observaciones {
+  white-space: normal !important;
+  max-width: 300px;
+  min-width: 180px;
+  word-break: break-word;
+}
+
+th.acciones, td.acciones {
+  min-width: 130px;
 }
 
 tr:nth-child(even) {
@@ -151,7 +85,29 @@ tr:hover {
   transition: background 0.2s;
 }
 
-/* Responsive para tabla */
+.acciones-fila {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 1.15rem;
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.icon-btn:hover {
+  background: #e9f1ff;
+}
+
+/* Responsive */
 @media (max-width: 900px) {
   .container {
     max-width: 98vw;
@@ -164,38 +120,4 @@ tr:hover {
     max-width: 160px;
     min-width: 80px;
   }
-}
-
-.acciones-columna {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  align-items: center;
-  min-width: 120px;
-}
-
-.acciones-fila {
-  display: flex;
-  flex-direction: row;
-  gap: 0.3rem;
-  justify-content: center;
-  align-items: center;
-  min-width: 90px;
-  max-width: 90px;
-  padding: 0;
-}
-
-.icon-btn {
-  background: none;
-  border: none;
-  color: #007bff;
-  font-size: 1.15rem;
-  cursor: pointer;
-  padding: 0.12rem 0.12rem;
-  border-radius: 4px;
-  transition: background 0.2s;
-}
-
-.icon-btn:hover {
-  background: #e9f1ff;
 }
