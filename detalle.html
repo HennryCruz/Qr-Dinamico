@@ -10,7 +10,13 @@
   <div class="container">
     <h1>Detalle del Registro</h1>
     <form id="formulario" style="display:none;">
-      <div class="form-group"><label>Proveedor:</label><input type="text" name="proveedor" /></div>
+      <div class="form-group">
+        <label>Proveedor:</label>
+        <select name="proveedor">
+          <option value="Infra">Infra</option>
+          <option value="Praxair">Praxair</option>
+        </select>
+      </div>
       <div class="form-group"><label>Usuario:</label><input type="text" name="usuario" /></div>
       <div class="form-group"><label>Contenido:</label><input type="text" name="contenido" /></div>
       <div class="form-group"><label>Edificio:</label><input type="text" name="edificio" /></div>
@@ -20,7 +26,7 @@
       <div class="form-group"><label>Fecha de Salida:</label><input type="date" name="fecha_salida" /></div>
       <div class="form-group"><label>No. Serie:</label><input type="text" name="no_serie" /></div>
       <div class="form-group"><label>Observaciones:</label><textarea name="observaciones"></textarea></div>
-      <div class="form-group">
+      <div class="form-group" id="estatus-group">
         <label>Estatus:</label>
         <select name="estatus">
           <option value="entregado">Entregado</option>
