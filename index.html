@@ -8,18 +8,23 @@
   <link rel="icon" href="data:,">
 </head>
 <body>
-  <h1>Tabla de Cilindros</h1>
-  <button onclick="crearNuevoRegistro()">Crear Nuevo QR</button>
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th><th>Proveedor</th><th>Usuario</th><th>Contenido</th><th>Cantidad</th>
-        <th>Edificio</th><th>Localización</th><th>Contrato</th><th>Fecha Entrada</th>
-        <th>Fecha Salida</th><th>No. Serie</th><th>Observaciones</th><th>Estatus</th><th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody id="tabla-registros"></tbody>
-  </table>
+  <div class="container">
+    <h1>Tabla de Cilindros</h1>
+    <button onclick="crearNuevoRegistro()">Crear Nuevo QR</button>
+    <div style="overflow-x: auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th><th>Proveedor</th><th>Usuario</th><th>Contenido</th><th>Cantidad</th>
+            <th>Edificio</th><th>Localización</th><th>Contrato</th><th>Fecha Entrada</th>
+            <th>Fecha Salida</th><th>No. Serie</th><th class="observaciones">Observaciones</th>
+            <th>Estatus</th><th class="acciones">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-registros"></tbody>
+      </table>
+    </div>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
