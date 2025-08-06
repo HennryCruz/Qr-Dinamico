@@ -57,7 +57,7 @@ function descargarQR(id) {
     imageOptions: {
       crossOrigin: "anonymous",
       margin: 4,
-      imageSize: 0.25, // 25% del QR
+      imageSize: 0.25,
     },
     dotsOptions: {
       color: "#222",
@@ -81,18 +81,18 @@ function descargarQR(id) {
     // Crear canvas para agregar texto debajo
     const canvas = document.createElement('canvas');
     canvas.width = 220;
-    canvas.height = 260; // Espacio extra para el texto
+    canvas.height = 270; // Más alto para el texto
     const ctx = canvas.getContext('2d');
 
     // Cargar la imagen QR
     const img = new window.Image();
     img.onload = function() {
       ctx.drawImage(img, 0, 0, 220, 220);
-      ctx.font = "bold 18px Segoe UI, Arial";
+      ctx.font = "bold 20px Segoe UI, Arial";
       ctx.fillStyle = "#222";
       ctx.textAlign = "center";
-      ctx.fillText(`ID: ${id}`, 110, 245); // Centrado debajo del QR
-
+      // Dibuja el texto justo debajo del QR
+      ctx.fillText(`No° ID: ${id}`, 110, 245); // Y=245 es justo debajo del QR
       // Descargar el canvas como imagen
       const link = document.createElement('a');
       link.href = canvas.toDataURL("image/png");
