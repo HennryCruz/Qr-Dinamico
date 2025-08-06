@@ -27,10 +27,10 @@ async function cargarRegistros() {
       <td>${registro.observaciones || ''}</td>
       <td>${registro.estatus || ''}</td>
       <td>
-        <div class="acciones-columna">
-          <a href="detalle.html?id=${registro.id}&edit=1" class="button">Modificar</a>
-          <button class="accion-btn" onclick="descargarQR(${registro.id})">Descargar QR</button>
-          <button class="accion-btn" onclick="eliminarRegistro(${registro.id})">Eliminar</button>
+        <div class="acciones-fila">
+          <button class="icon-btn" title="Modificar" onclick="location.href='detalle.html?id=${registro.id}&edit=1'">✏️</button>
+          <button class="icon-btn" title="Descargar QR" onclick="descargarQR(${registro.id})">📥</button>
+          <button class="icon-btn" title="Eliminar" onclick="eliminarRegistro(${registro.id})">🗑️</button>
         </div>
       </td>
     `;
