@@ -28,7 +28,8 @@ async function cargarRegistros() {
       <td>${registro.estatus || ''}</td>
       <td>
         <a href="detalle.html?id=${registro.id}&edit=1" class="button">Modificar</a>
-        <button onclick="descargarQR(${registro.id})">Descargar QR</button>
+        <button class="accion-btn" onclick="descargarQR(${registro.id})">Descargar QR</button>
+        <button class="accion-btn" onclick="eliminarRegistro(${registro.id})">Eliminar</button>
       </td>
     `;
     tabla.appendChild(fila);
@@ -46,6 +47,18 @@ async function crearNuevoRegistro() {
   }
   alert(`Registro creado con No° ID ${nuevoId}.`);
   cargarRegistros();
+}
+
+async function eliminarRegistro(id) {
+  if (!confirm(`¿Seguro que deseas eliminar el registro con ID ${id}?`)) return;
+  const { error } = await supabase.from('registros_qr').delete().eq('id', id);
+  if (error) {
+    alert('No se pudo eliminar el registro.');
+    console.error(error);
+  } else {
+    alert('Registro eliminado correctamente.');
+    cargarRegistros();
+  }
 }
 
 function descargarQR(id) {
