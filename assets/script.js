@@ -119,6 +119,28 @@ function descargarQR(id) {
   }, 800);
 }
 
-if (document.getElementById('tabla-registros')) {
-  window.addEventListener('DOMContentLoaded', cargarRegistros);
+// 🔍 FILTRO EN TIEMPO REAL
+document.addEventListener("DOMContentLoaded", () => {
+  const inputBusqueda = document.getElementById("busqueda");
+  if (inputBusqueda) {
+    inputBusqueda.addEventListener("input", function () {
+      const filtro = this.value.toLowerCase();
+      const filas = document.querySelectorAll("#tabla-registros tr");
+      filas.forEach(fila => {
+        const textoFila = fila.textContent.toLowerCase();
+        fila.style.display = textoFila.includes(filtro) ? "" : "none";
+      });
+    });
+  }
+
+  cargarRegistros(); // inicializa la tabla al cargar
+});
+
+// 📥 EXPORTAR A EXCEL
+function exportarAExcel() {
+  const tabla = document.querySelector("table");
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.table_to_sheet(tabla);
+  XLSX.utils.book_append_sheet(wb, ws, "Cilindros");
+  XLSX.writeFile(wb, "tabla_cilindros.xlsx");
 }
