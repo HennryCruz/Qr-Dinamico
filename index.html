@@ -10,7 +10,15 @@
 <body>
   <div class="container">
     <h1>Tabla de Cilindros</h1>
-    <button onclick="crearNuevoRegistro()">Crear Nuevo QR</button>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <input type="text" id="busqueda" placeholder="🔍 Buscar en la tabla..." style="flex: 1; max-width: 300px; padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;">
+      <div style="display: flex; gap: 0.5rem;">
+        <button onclick="crearNuevoRegistro()">Crear Nuevo QR</button>
+        <button onclick="exportarAExcel()">Exportar a Excel</button>
+      </div>
+    </div>
+
     <div style="overflow-x: auto;">
       <table>
         <thead>
@@ -25,9 +33,12 @@
       </table>
     </div>
   </div>
+
+  <!-- Librerías necesarias -->
   <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="assets/script.js"></script>
 </body>
 </html>
