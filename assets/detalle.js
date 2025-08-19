@@ -33,6 +33,7 @@ async function cargarDetalle() {
       <div><strong>Proveedor:</strong> ${data.proveedor || ''}</div>
       <div><strong>Usuario:</strong> ${data.usuario || ''}</div>
       <div><strong>Contenido:</strong> ${data.contenido || ''}</div>
+      <div><strong>Tipo:</strong> ${data.tipo || ''}</div>
       <div><strong>Edificio:</strong> ${data.edificio || ''}</div>
       <div><strong>Localización:</strong> ${data.localizacion || ''}</div>
       <div><strong>Fecha de Entrada:</strong> ${data.fecha_entrada || ''}</div>
@@ -74,7 +75,7 @@ async function cargarDetalle() {
 async function guardarCambios(e) {
   e.preventDefault();
   const campos = [
-    'proveedor', 'usuario', 'contenido', 'edificio',
+    'proveedor', 'usuario', 'contenido', 'tipo', 'edificio',
     'localizacion', 'contrato', 'fecha_entrada', 'fecha_salida',
     'no_serie', 'observaciones', 'estatus'
   ];
@@ -112,6 +113,7 @@ async function guardarCambios(e) {
         <div><strong>Proveedor:</strong> ${data.proveedor || ''}</div>
         <div><strong>Usuario:</strong> ${data.usuario || ''}</div>
         <div><strong>Contenido:</strong> ${data.contenido || ''}</div>
+        <div><strong>Tipo:</strong> ${data.tipo || ''}</div>
         <div><strong>Edificio:</strong> ${data.edificio || ''}</div>
         <div><strong>Localización:</strong> ${data.localizacion || ''}</div>
         <div><strong>Fecha de Entrada:</strong> ${data.fecha_entrada || ''}</div>

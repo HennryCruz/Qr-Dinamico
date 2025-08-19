@@ -17,6 +17,7 @@ async function cargarRegistros() {
       <td>${registro.proveedor || ''}</td>
       <td>${registro.usuario || ''}</td>
       <td>${registro.contenido || ''}</td>
+      <td>${registro.tipo || ''}</td> <!-- Nueva columna -->
       <td>${registro.cantidad || ''}</td>
       <td>${registro.edificio || ''}</td>
       <td>${registro.localizacion || ''}</td>
