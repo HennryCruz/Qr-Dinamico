@@ -17,7 +17,7 @@ async function cargarRegistros() {
       <td>${registro.proveedor || ''}</td>
       <td>${registro.usuario || ''}</td>
       <td>${registro.contenido || ''}</td>
-      <td>${registro.tipo || ''}</td> <!-- Nueva columna -->
+      <td>${registro.tipo || ''}</td>
       <td>${registro.cantidad || ''}</td>
       <td>${registro.edificio || ''}</td>
       <td>${registro.localizacion || ''}</td>
@@ -120,7 +120,7 @@ function descargarQR(id) {
   }, 800);
 }
 
-// 🔍 FILTRO EN TIEMPO REAL
+// FILTRO EN TIEMPO REAL
 document.addEventListener("DOMContentLoaded", () => {
   const inputBusqueda = document.getElementById("busqueda");
   if (inputBusqueda) {
@@ -137,11 +137,25 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarRegistros(); // inicializa la tabla al cargar
 });
 
-// 📥 EXPORTAR A EXCEL
+// EXPORTAR A EXCEL
 function exportarAExcel() {
   const tabla = document.querySelector("table");
+  const filas = Array.from(tabla.querySelectorAll("tbody tr"))
+    .filter(fila => fila.style.display !== "none"); // Solo filas visibles (filtradas)
+
+  // Obtener encabezados, excluyendo la última columna ("Acciones")
+  const ths = Array.from(tabla.querySelectorAll("thead th"));
+  const headers = ths.slice(0, ths.length - 1).map(th => th.textContent);
+
+  // Obtener datos de las filas visibles, excluyendo la última columna
+  const datos = filas.map(fila => {
+    const celdas = Array.from(fila.querySelectorAll("td"));
+    return celdas.slice(0, celdas.length - 1).map(td => td.textContent);
+  });
+
+  // Crear hoja de Excel
   const wb = XLSX.utils.book_new();
-  const ws = XLSX.utils.table_to_sheet(tabla);
+  const ws = XLSX.utils.aoa_to_sheet([headers, ...datos]);
   XLSX.utils.book_append_sheet(wb, ws, "Cilindros");
   XLSX.writeFile(wb, "tabla_cilindros.xlsx");
 }
