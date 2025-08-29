@@ -17,12 +17,12 @@ async function cargarDetalle() {
   const vistaDatos = document.getElementById('vista-datos');
   const campoFechaSalida = document.querySelector('[name="fecha_salida"]').parentElement;
 
-  // Si viene de "Modificar" (edit=1), siempre mostrar formulario
+  // Formulario
   if (editMode) {
     formulario.style.display = 'block';
     vistaDatos.style.display = 'none';
   } else if (!data.proveedor && !data.contenido && !data.edificio && !data.contrato && !data.observaciones) {
-    // Si no hay datos obligatorios, mostrar formulario
+    // Si no hay datos, mostrar formulario
     formulario.style.display = 'block';
     vistaDatos.style.display = 'none';
   } else {
@@ -48,7 +48,6 @@ async function cargarDetalle() {
     if (input) input.value = data[campo] || '';
   }
 
-  // Mostrar/ocultar campo fecha_salida según estatus
   const estatusSelect = document.querySelector('[name="estatus"]');
   function toggleFechaSalida() {
     if (estatusSelect.value === 'devolucion') {
@@ -127,3 +126,4 @@ async function guardarCambios(e) {
 
 window.addEventListener('DOMContentLoaded', cargarDetalle);
 document.getElementById('formulario').addEventListener('submit', guardarCambios);
+
